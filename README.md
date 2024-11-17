@@ -25,8 +25,8 @@ This project involves:
 - **Data Analysis**: Understanding the dataset and exploring relationships between variables.
 - **Data Preprocessing**: Cleaning the data, handling missing values, encoding categorical variables, and scaling numeric features.
 - **Class Imbalance Handling**: Addressing the imbalance in the target variable using SMOTE (Synthetic Minority Oversampling Technique).
-- **Model Training**: Using Logistic Regression to classify clients as likely or unlikely to subscribe.
-- **Evaluation**: Measuring the model's performance through metrics such as accuracy, precision, recall, and F1-score.
+- **Model Training**: Using Logistic Regression and Random Forest classifiers to classify clients as likely or unlikely to subscribe.
+- **Evaluation**: Measuring the models' performance through metrics such as accuracy, precision, recall, and F1-score.
 
 ---
 
@@ -65,28 +65,43 @@ To develop a predictive model that classifies bank clients as likely or unlikely
 ### 3. Handle Class Imbalance
 - Apply **SMOTE** to oversample the minority class (`"yes"`) in the training dataset.
 
-### 4. Model Training
-- Train a **Logistic Regression** model with and without class balancing.
-- Evaluate the model using metrics such as accuracy, confusion matrix, precision, recall, and F1-score.
+### 4. Model Training and Evaluation
+
+#### Logistic Regression
+- Trained a **Logistic Regression** model with and without class balancing.
+- Achieved a recall of 81% for the minority class after applying SMOTE, indicating improved sensitivity to subscribers.
+
+#### Random Forest
+- Trained a **Random Forest** classifier, testing it both with and without class balancing.
+- Evaluated using metrics such as accuracy, precision, recall, and F1-score.
+- Results showed high overall accuracy but lower recall for the minority class compared to Logistic Regression.
 
 ### 5. Save Processed Data
-- Save the cleaned and split data as `.csv` and `.npy` files for easy reuse.
+- Saved the cleaned and split data as `.csv` and `.npy` files for easy reuse.
 
 ---
 
 ## Results
 
-### Key Metrics
-| Metric               | Value (After SMOTE) |
-|----------------------|---------------------|
-| **Accuracy**         | 83%                |
-| **Precision (Class 1)** | 38%              |
-| **Recall (Class 1)**    | 81%              |
-| **F1-Score (Class 1)**  | 52%              |
+### Logistic Regression (After SMOTE)
+| Metric               | Value              |
+|----------------------|--------------------|
+| **Accuracy**         | 83%               |
+| **Precision (Class 1)** | 38%             |
+| **Recall (Class 1)**    | 81%             |
+| **F1-Score (Class 1)**  | 52%             |
+
+### Random Forest (After SMOTE)
+| Metric               | Value              |
+|----------------------|--------------------|
+| **Accuracy**         | 90%               |
+| **Precision (Class 1)** | 58%             |
+| **Recall (Class 1)**    | 39%             |
+| **F1-Score (Class 1)**  | 47%             |
 
 ### Observations
-- **Improved Recall**: The recall for the minority class improved significantly after applying SMOTE.
-- **Balanced Detection**: The model can now effectively identify both subscribers and non-subscribers, although precision for subscribers has decreased.
+- **Logistic Regression**: Higher recall for the minority class makes it better for identifying subscribers, though precision is lower.
+- **Random Forest**: Higher precision and accuracy overall but struggles with recall for the minority class.
 
 ---
 
@@ -95,14 +110,9 @@ To develop a predictive model that classifies bank clients as likely or unlikely
 - `bank.csv`: Original dataset.
 - `processed_data.zip`: Preprocessed `.csv` files for train-test split.
 - `processed_data_npy.zip`: Preprocessed `.npy` files for train-test split.
-- `model.ipynb`: Notebook containing model training and evaluation code.
+- `model.ipynb`: Notebook containing Logistic Regression and Random Forest implementations.
 
 ---
-## Prerequisites
-
-- Python 3.8 or higher
-- Jupyter Notebook
-- Required libraries (see `requirements.txt`)
 
 ## How to Run
 
@@ -110,13 +120,36 @@ To develop a predictive model that classifies bank clients as likely or unlikely
    ```bash
    git clone https://github.com/your-repository/bank-marketing-prediction.git
    cd bank-marketing-prediction
+   ```
+
 2. **Install Dependencies**
-    ```bash
-    pip install -r requirements.txt
-3. **Run Bank Data Exploration**
-    ```bash
-    jupyter notebook BankData_exploration.ipynb
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run Data Exploration**
+   ```bash
+   jupyter notebook BankData_exploration.ipynb
+   ```
+
 4. **Run Logistic Regression Model**
-    ```bash
-    jupyter notebook BankLogisticRegModel.ipynb
+   ```bash
+   jupyter notebook BankLogisticRegModel.ipynb
+   ```
+
+5. **Run Random Forest Model**
+   ```bash
+   jupyter notebook BankRandomForestModel.ipynb
+   ```
+
+---
+
+## Technologies Used
+
+- **Python**: Core programming language.
+- **Pandas**: For data manipulation and analysis.
+- **Matplotlib/Seaborn**: For data visualization.
+- **Scikit-learn**: For preprocessing, training, and evaluation.
+- **Imbalanced-learn**: For handling class imbalance (SMOTE).
+- **Jupyter Notebook**: For interactive development.
 
